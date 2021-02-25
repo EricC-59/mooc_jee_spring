@@ -1,10 +1,11 @@
 package game;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class FirstTask {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, SQLException {
 		// First, we have to register our JDBC Driver, we use SQLite this week.
 		try {
 			Class.forName("org.sqlite.JDBC");
