@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/bag")
 public class BagServlet extends HttpServlet {
-    private static final long serialVersionUID = -8971569105872527873L;
+    private static final long serialVersionUID = -897156910587252773L;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         Bag myBag = getBag(req);
