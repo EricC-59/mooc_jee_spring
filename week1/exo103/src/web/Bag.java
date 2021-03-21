@@ -41,7 +41,7 @@ public class Bag implements Serializable {
         try {
             out.append("<ul>\n");
             for (Entry<String, Integer> entry : entries.entrySet()) {
-                out.append(String.format("<li class=\"%1$s\">%1$s: %2$03d</li>%n", entry.getKey(), entry.getValue()));
+                out.append(String.format("<li class=\"%s\">%03d</li>%n", entry.getKey(), entry.getValue()));
             }
             out.append("</ul>\n");
         } catch (IOException e) {

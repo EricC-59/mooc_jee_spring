@@ -1,6 +1,6 @@
 # Exercice 1/03
 
-Cet exercice met en œuvre l'ensemble des notions vues cette semaine.  
+Cet exercice met en oeuvre l'ensemble des notions vues cette semaine.  
 
 Nous allons créer un sac permettant de ranger une liste d'objets.  
 Ce sac pourrait être vu comme un sac d'achat sur internet, ou le sac magique d'items d'un jeu.
@@ -89,7 +89,7 @@ Le contenu du war devrait donc être :
 WEB-INF/
  |_ bag.jsp
  |_ classes/
-    |_ web/
+    |_ webcart/
        |_ Bag.class
        |_ BagServlet.class 
 ```
