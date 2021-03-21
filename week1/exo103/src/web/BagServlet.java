@@ -14,13 +14,27 @@ import javax.servlet.http.HttpSession;
 public class BagServlet extends HttpServlet {
     private static final long serialVersionUID = -8971569105872527873L;
 
-    private static final String MY_BAG = "myBag";
-
-    public static final String JSP_VIEW = "/WEB-INF/bag.jsp";
-
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        req.setAttribute("bag", req.getSession().getAttribute(MY_BAG));
-        req.getRequestDispatcher(JSP_VIEW).forward(req, res);
+        Bag myBag = getBag(req);
+
+        res.setContentType("text/html;charset=UTF-8");
+
+        PrintWriter out = res.getWriter();
+        out.write("<html>\n");
+        out.write(" <body>\n");
+
+        myBag.print(out);
+
+        out.write("     <form action='/exo103/bag' method='post'>\n");
+        out.write("         <label for='ref'>Reférence&nbsp;:</label>\n");
+        out.write("         <input type='text' name='ref'><br/>\n");
+        out.write("         <label for='qty'>Quantité&nbsp;:</label>\n");
+        out.write("         <input type='text' name='qty'><br/>\n");
+        out.write("         <input type='submit'>\n");
+        out.write("     </form>\n");
+        out.write(" </body>\n");
+        out.write("</html>\n");
+
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -29,6 +43,8 @@ public class BagServlet extends HttpServlet {
         String qty = req.getParameter("qty");
 
         PrintWriter out = res.getWriter();
+        out.write("<html>\n");
+        out.write(" <body>\n");
 
         if (ref == null || qty == null || ref.isBlank() || qty.isBlank()) {
             res.setStatus(400);
@@ -39,7 +55,7 @@ public class BagServlet extends HttpServlet {
                 Bag myBag = getBag(req);
                 myBag.setItem(ref, Integer.parseInt(qty));
                 HttpSession ses = req.getSession();
-                ses.setAttribute(MY_BAG, myBag);
+                ses.setAttribute("myBag", myBag);
                 myBag.print(out);
                 res.sendRedirect("/exo103/bag");
             } catch (NumberFormatException e) {
@@ -49,6 +65,9 @@ public class BagServlet extends HttpServlet {
             }
         }
 
+        out.write(String.format("<p>Référence&nbsp;: %s<br/>", ref));
+        out.write(String.format("Quantité&nbsp;: %s</p>", qty));
+
         out.write(" </body>\n");
         out.write("</html>\n");
 
@@ -56,7 +75,7 @@ public class BagServlet extends HttpServlet {
 
     private Bag getBag(HttpServletRequest req) {
         HttpSession ses = req.getSession();
-        Bag myBag = (Bag) ses.getAttribute(MY_BAG);
+        Bag myBag = (Bag) ses.getAttribute("myBag");
         if (myBag == null) {
             myBag = new Bag();
         }
