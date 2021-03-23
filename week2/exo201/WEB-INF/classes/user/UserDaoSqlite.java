@@ -41,7 +41,7 @@ public class UserDaoSqlite implements UserDao {
 	
 	@Override
 	public User findByEmail(String email) {
-		// TODO : get user data by its ID and map to User object 
+		// TODO : get user data by its email and map to User object 
 		throw new RuntimeException("not yet implemented");
 	}
 	
